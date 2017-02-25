@@ -23,10 +23,11 @@
                 <tr>
                     <td>{{$user->id}}</td>
                     <td>
-                        <img height="100" width="100"
-                             src="{{$user->photo ? $user->photo->file : 'http://placehold.it/100x100'}}" alt="">
+                        <img height="100" width="100" src="{{$user->photo->file}}" alt="">
                     </td>
-                    <td>{{$user->name}}</td>
+                    <td>
+                        <a href="{{route('admin.users.edit', $user->id)}}">{{$user->name}}</a>
+                    </td>
                     <td>{{$user->email}}</td>
                     <td>{{$user->role->name}}</td>
                     <td>{{($user->is_active == 1) ? 'active' : 'disabled'}}</td>
