@@ -29,6 +29,12 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($value);
     }
 
+    /**
+     *
+     *  Relationships
+     *
+     */
+
     // One to One Relationship
     public function role(){
         return $this->belongsTo('App\Role');
@@ -38,7 +44,19 @@ class User extends Authenticatable
         return $this->belongsTo('App\Photo');
     }
 
+    /**
+     *
+     *  Middleware Methods
+     *
+     */
 
+    public function isAdmin(){
+        return ($this->role->name == 'administrator' && $this->is_active == 1) ? true : false;
+    }
 
-
+    /**
+     *
+     *  Custom Methods
+     *
+     */
 }

@@ -4,6 +4,8 @@
 
     <h1>Users</h1>
 
+    @include('includes.user_delete')
+
     @if($users)
         <table class="table table-striped">
             <thead>
