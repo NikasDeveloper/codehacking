@@ -44,6 +44,12 @@ class User extends Authenticatable
         return $this->belongsTo('App\Photo');
     }
 
+    // One to many
+
+    public function posts(){
+        return $this->hasMany('App\Post');
+    }
+
     /**
      *
      *  Middleware Methods

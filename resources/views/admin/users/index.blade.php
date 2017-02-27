@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1>Users</h1>
+    <h1>All Users</h1>
 
     @include('includes.user_delete')
 
