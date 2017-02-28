@@ -24,7 +24,7 @@
                     <td>{{$post->id}}</td>
                     <td><img src="{{$post->photo->file}}" alt="Bullshit" height="50" width="50"></td>
                     <td><a href="{{route('admin.users.edit', $post->user->id)}}">{{$post->user->name}}</a></td>
-                    <td>{{$post->category_id}}</td>
+                    <td>{{$post->category->name}}</td>
                     <td>{{$post->title}}</td>
                     <td>{{$post->body}}</td>
                     <td>{{$post->created_at}}</td>
