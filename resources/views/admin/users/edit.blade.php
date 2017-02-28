@@ -44,7 +44,7 @@
         </div>
 
         <div class="form-group col-sm-6" style="padding-left: 0px;">
-            {!! Form::submit('Upadate User', [ 'class' => 'btn btn-primary pull-left']) !!}
+            {!! Form::submit('Update User', [ 'class' => 'btn btn-primary pull-left']) !!}
         </div>
 
         {!! Form::close() !!}

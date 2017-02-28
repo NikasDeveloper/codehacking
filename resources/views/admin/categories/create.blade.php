@@ -2,6 +2,6 @@
 
 @section('content')
 
-    <h1>All Categories</h1>
+    <h1>Create Category</h1>
 
 @endsection

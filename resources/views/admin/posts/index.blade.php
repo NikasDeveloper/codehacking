@@ -4,6 +4,8 @@
 
     <h1>All Posts</h1>
 
+    @include('includes.user_delete')
+
     @if($posts)
         <table class="table table-striped">
             <thead>
@@ -22,7 +24,10 @@
             @foreach($posts as $post)
                 <tr>
                     <td>{{$post->id}}</td>
-                    <td><img src="{{$post->photo->file}}" alt="Bullshit" height="50" width="50"></td>
+                    <td><a href="{{route('admin.posts.edit', $post->id)}}">
+                            <img src="{{$post->photo->file}}" alt="" height="50px" width="50px">
+                        </a>
+                    </td>
                     <td><a href="{{route('admin.users.edit', $post->user->id)}}">{{$post->user->name}}</a></td>
                     <td>{{$post->category->name}}</td>
                     <td>{{$post->title}}</td>
