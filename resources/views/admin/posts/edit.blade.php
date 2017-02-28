@@ -6,7 +6,7 @@
 
     <div class="row">
         <div class="col-sm-3">
-            <img src="{{$post->photo->file}}" alt="Shit" class="img-responsive img-rounded">
+            <img src="{{$post->photo->file}}" alt="Shit" width="100%" height="100%">
         </div>
         <div class="col-sm-9">
 
