@@ -47,4 +47,9 @@ class Post extends Model
     public function category(){
         return $this->belongsTo('App\Category');
     }
+
+    //One to many
+    public function comments(){
+        return $this->hasMany('App\Comments');
+    }
 }

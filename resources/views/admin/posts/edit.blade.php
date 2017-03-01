@@ -6,7 +6,7 @@
 
     <div class="row">
         <div class="col-sm-3">
-            <img src="{{$post->photo->file}}" alt="Shit" width="100%" height="100%">
+            <img src="{{$post->photo->file}}" alt="Shit" class="img-responsive img-rounded"
         </div>
         <div class="col-sm-9">
 
@@ -18,7 +18,7 @@
             </div>
 
             <div class="form-group">
-                {!! Form::label('body', 'Name:') !!}
+                {!! Form::label('body', 'Body:') !!}
                 {!! Form::textArea('body', null, ['class' => 'form-control', 'rows' => 3, 'style' => 'resize:vertical;']) !!}
             </div>
 
