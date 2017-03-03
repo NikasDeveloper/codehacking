@@ -2,54 +2,84 @@
 
 namespace App;
 
-use Carbon\Carbon;
+
+
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 
 class Post extends Model
 {
+    //
+
+    use Sluggable;
+    use SluggableScopeHelpers;
+
+
+
+
     protected $fillable = [
-        'user_id',
+
         'category_id',
         'photo_id',
         'title',
-        'body',
+        'body'
+
+
+
     ];
 
-    /**
-     *
-     *  Accessors
-     *
-     */
-
-    public function getCreatedAtAttribute($value){
-        return Carbon::parse($value)->diffForHumans();
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 
-    public function getUpdatedAtAttribute($value){
-        return Carbon::parse($value)->diffForHumans();
-    }
 
-    /**
-     *
-     *  Relationships
-     *
-     */
 
-    // One to one
     public function user(){
+
+
         return $this->belongsTo('App\User');
+
+
     }
+
+
 
     public function photo(){
+
+
         return $this->belongsTo('App\Photo');
+
+
     }
+
 
     public function category(){
+
+
         return $this->belongsTo('App\Category');
+
+
     }
 
-    //One to many
+
+
     public function comments(){
-        return $this->hasMany('App\Comments');
+
+
+        return $this->hasMany('App\Comment');
+
+
     }
+
+
+
+
+
+
 }

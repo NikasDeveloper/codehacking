@@ -1,10 +1,12 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class AddPhotoColumnToComments extends Migration
+
+class AddSlugToPostsTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -12,8 +14,8 @@ class AddPhotoColumnToComments extends Migration
      */
     public function up()
     {
-        Schema::table('comments', function (Blueprint $table) {
-            $table->string('photo');
+        Schema::table('posts', function (Blueprint $table) {
+            $table->string('slug')->nullable();
         });
     }
 
@@ -24,8 +26,9 @@ class AddPhotoColumnToComments extends Migration
      */
     public function down()
     {
-        Schema::table('comments', function (Blueprint $table) {
-            $table->dropColumn('photo');
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropColumn('slug');
         });
     }
+
 }

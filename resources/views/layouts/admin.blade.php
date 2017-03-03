@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Codehacking Admin Panel</title>
+    <title>Admin</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
@@ -25,7 +25,7 @@
     <![endif]-->
 
 
-
+    @yield('styles')
 
 </head>
 
@@ -54,7 +54,11 @@
             <!-- /.dropdown -->
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i><span style="margin: 0px 5px;">{{Auth::user()->name}}</span><i class="fa fa-caret-down"></i>
+                    <i class="fa fa-user fa-fw"></i> {{Auth::user()->name}} <i class="fa fa-caret-down">
+
+
+
+                    </i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -107,7 +111,7 @@
                     <li class="sidebar-search">
                         <div class="input-group custom-search-form">
                             <input type="text" class="form-control" placeholder="Search...">
-                            <span class="input-group-btn">
+                                <span class="input-group-btn">
                                     <button class="btn btn-default" type="button">
                                         <i class="fa fa-search"></i>
                                     </button>
@@ -120,7 +124,7 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-user fa-fw"></i>Users<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Users<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="{{route('admin.users.index')}}">All Users</a>
@@ -135,7 +139,7 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-at fa-fw"></i> Posts<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Posts<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="{{route('admin.posts.index')}}">All Posts</a>
@@ -155,11 +159,13 @@
 
 
                     <li>
-                        <a href="#"><i class="fa fa-tag fa-fw"></i>Categories<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Categories<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="{{route('admin.categories.index')}}">All Categories</a>
                             </li>
+
+
 
                         </ul>
                         <!-- /.nav-second-level -->
@@ -167,7 +173,7 @@
 
 
                     <li>
-                        <a href="#"><i class="fa fa-file-image-o fa-fw"></i>Media<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Media<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="{{route('admin.media.index')}}">All Media</a>
@@ -180,6 +186,7 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
+
 
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
@@ -319,6 +326,7 @@
 
 
 
+
 <!-- Page Content -->
 <div id="page-wrapper">
     <div class="container-fluid">
@@ -343,7 +351,7 @@
 <script src="{{asset('js/libs.js')}}"></script>
 
 
-@yield('footer')
+@yield('scripts')
 
 
 

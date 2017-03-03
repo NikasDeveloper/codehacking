@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class PostCreateRequest extends Request
+class PostsCreateRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,13 @@ class PostCreateRequest extends Request
     public function rules()
     {
         return [
-            'title'         => 'required|max:255',
-            'body'          => 'required',
-            'category_id'   => 'required',
+            //
+//            'title'       =>'required',
+//            'category_id' =>'required',
+//            'photo_id'    =>'required',
+//            'body'        =>'required'
+
+
         ];
     }
 }

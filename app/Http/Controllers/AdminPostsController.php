@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\Comment;
-use App\Http\Requests\PostCreateRequest;
+use App\Http\Requests\PostsCreateRequest;
 use App\Photo;
 use App\Post;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class AdminPostsController extends Controller
 {
@@ -22,8 +20,16 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        return view('admin.posts.index', compact('posts'));
+        //
+
+
+        $posts = Post::paginate(2);
+
+
+
+        return view('admin.posts.index', compact('posts','categories'));
+
+
     }
 
     /**
@@ -33,7 +39,12 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
-        $categories = Category::lists('name', 'id')->all();
+        //
+
+
+        $categories = Category::pluck('name','id')->all();
+
+
         return view('admin.posts.create', compact('categories'));
     }
 
@@ -43,22 +54,46 @@ class AdminPostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostCreateRequest $request)
+    public function store(PostsCreateRequest $request)
     {
-        $user  = Auth::user();
+        //
+
         $input = $request->all();
-        $input['user_id'] = $user->id;
+
+
+        $user = Auth::user();
+
 
         if($file = $request->file('photo_id')){
+
+
             $name = time() . $file->getClientOriginalName();
+
+
             $file->move('images', $name);
-            $photo = Photo::create(['file' => $name]);
+
+            $photo = Photo::create(['file'=>$name]);
+
+
             $input['photo_id'] = $photo->id;
+
+
         }
 
-        $post_id = $user->posts()->create($input);
 
-        return redirect(route('admin.posts.edit', $post_id));
+
+
+        $user->posts()->create($input);
+
+
+
+
+        return redirect('/admin/posts');
+
+
+
+
+
 
     }
 
@@ -81,9 +116,15 @@ class AdminPostsController extends Controller
      */
     public function edit($id)
     {
+        //
+
         $post = Post::findOrFail($id);
-        $categories = Category::lists('name', 'id')->all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+
+        $categories = Category::pluck('name','id')->all();
+
+        return view('admin.posts.edit', compact('post','categories'));
+
+
     }
 
     /**
@@ -95,18 +136,37 @@ class AdminPostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post  = Post::findOrFail($id);
+        //
+
         $input = $request->all();
 
+
+
         if($file = $request->file('photo_id')){
+
+
             $name = time() . $file->getClientOriginalName();
+
+
             $file->move('images', $name);
-            $photo = Photo::create(['file' => $name ]);
+
+            $photo = Photo::create(['file'=>$name]);
+
+
             $input['photo_id'] = $photo->id;
+
+
         }
 
-        Auth::user()->posts()->whereId($id)->first()->update($input);
-        return redirect(route('admin.posts.edit', $post->id));
+
+      Auth::user()->posts()->whereId($id)->first()->update($input);
+
+
+        return redirect('/admin/posts');
+
+
+
+
     }
 
     /**
@@ -117,23 +177,33 @@ class AdminPostsController extends Controller
      */
     public function destroy($id)
     {
+        //
+
         $post = Post::findOrFail($id);
 
-        if($post->photo_id != 0){
-            $photo = Photo::findOrFail($post->photo_id);
-            unlink(public_path() . $photo->file );
-            $photo->delete();
-        }
+        unlink(public_path() . $post->photo->file);
 
-        $deleteMessage = $post->title . ' has been deleted!';
-        Session::flash('user_deleted', $deleteMessage);
         $post->delete();
-        return redirect(route('admin.posts.index'));
+
+        return redirect('/admin/posts');
+
+
     }
 
-    public function post($id){
-        $post = Post::findOrFail($id);
-        $comments = Comment::where('is_active', '>', 0)->get();
-        return view('post', compact('post', 'comments'));
+
+    public function post($slug){
+
+
+        $post = Post::findBySlugOrFail($slug);
+
+        $comments = $post->comments()->whereIsActive(1)->get();
+
+
+        return view('post', compact('post','comments'));
+
+
     }
+
+
+
 }

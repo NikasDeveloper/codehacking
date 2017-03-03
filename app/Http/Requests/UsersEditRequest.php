@@ -24,10 +24,16 @@ class UsersEditRequest extends Request
     public function rules()
     {
         return [
-            'name'      => 'required|max:255',
-            'email'     => 'required|email|max:255',
-            'role_id'   => 'required',
-            'is_active' => 'required',
+            //
+
+            'name'=> 'required',
+            'email'=>'required',
+            'role_id'=>'required',
+            'is_active'=>'required',
+
+
+
+
         ];
     }
 }
