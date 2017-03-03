@@ -17,7 +17,7 @@
                     <th>Title</th>
                     <th>Body</th>
                     <th>Created</th>
-                    <th>Updated</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -33,7 +33,7 @@
                     <td>{{$post->title}}</td>
                     <td>{{$post->body}}</td>
                     <td>{{$post->created_at}}</td>
-                    <td>{{$post->updated_at}}</td>
+                    <td><a href="{{route('home.post', $post->id)}}">Preview</a></td>
                 </tr>
             @endforeach
             </tbody>

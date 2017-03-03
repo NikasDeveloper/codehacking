@@ -133,7 +133,7 @@ class AdminPostsController extends Controller
 
     public function post($id){
         $post = Post::findOrFail($id);
-        $comments = Comment::all();
+        $comments = Comment::where('is_active', '>', 0)->get();
         return view('post', compact('post', 'comments'));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class CommentReply extends Model
@@ -11,7 +12,22 @@ class CommentReply extends Model
         'is_active',
         'author',
         'body',
+        'photo'
     ];
+
+    /**
+     *
+     *  Accessors
+     *
+     */
+
+    public function getCreatedAtAttribute($value){
+        return Carbon::parse($value)->diffForHumans();
+    }
+
+    public function getUpdatedAtAttribute($value){
+        return Carbon::parse($value)->diffForHumans();
+    }
 
     /**
      *
